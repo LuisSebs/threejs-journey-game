@@ -1,6 +1,9 @@
 import Draggable from "react-draggable"
-import { useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import useGame from "./stores/useGame"
+import { useFrame } from "@react-three/fiber"
+import { addEffect } from "@react-three/fiber"
+import { RigidBody } from "@react-three/rapier"
 
 export default function InterfaceMobile()
 {
@@ -8,20 +11,42 @@ export default function InterfaceMobile()
     const object = useRef()
     const jump = useGame((state) => state.jump)
 
-    const handleDrag = () => {
-        const {x, y} = object.current.state
-        console.log(x)
-        console.log(y)
-    }
-
     const handleStop = () => {
         object.current.state.x = 0
         object.current.state.y = 0
     }
 
     const handleClick = () => {
+        const state = useGame.getState()
+        state.start()
         jump()
     }
+
+    useEffect(() =>
+    {
+
+        const unsubscribeEffect = addEffect(() => {
+            const state = useGame.getState()
+            const move = state.move
+            const { x, y } = object.current.state
+            if (x!=0 && y!=0){
+                const state = useGame.getState()
+                state.start()
+            }
+            if(move != null){
+                const bodyPosition = move(x,y)
+                const blocksCount = state.blocksCount
+                if(bodyPosition.z < - (blocksCount * 4 + 2))
+                    state.end()
+                if(bodyPosition.y < -4)
+                    state.restart()
+            }
+        })
+
+        return () => {
+            unsubscribeEffect()
+        }
+    },[])
    
     return <div className="mobile-controls">
         {/* Movement */}
@@ -30,7 +55,6 @@ export default function InterfaceMobile()
                     ref={ object }
                     axis="both"
                     bounds={ { top:-25, left: -25, right: 25, bottom: 25} }
-                    onDrag={ handleDrag }
                     onStop={ handleStop }
                 >
                     <div className="key">   

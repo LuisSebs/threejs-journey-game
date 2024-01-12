@@ -20,6 +20,22 @@ export default function Player()
     const restart = useGame((state) => state.restart)
     const blocksCount = useGame((state) => state.blocksCount)
     const setJump = useGame((state) => state.setJump)
+    const setMove = useGame((state) => state.setMove)
+    const setReset = useGame((state) => state.setReset)
+
+    const move = (x,y) =>
+    {
+        const impulse = { x: 0, y: 0, z: 0 }
+        const impulseStrengthForwardBackward = 0.01 * (y/25)
+        const impulseStrengthLeftwardRightward = 0.01 * (x/25)
+        impulse.z += impulseStrengthForwardBackward
+        impulse.x += impulseStrengthLeftwardRightward
+        body.current.applyImpulse(impulse)
+        
+        const bodyPosition = body.current.translation()
+        
+        return bodyPosition
+    }
 
     const jump = () =>
     {
@@ -65,6 +81,10 @@ export default function Player()
     {
         setJump( jump )
 
+        setMove( move )
+
+        setReset( reset ) 
+
         const unsubscribeReset = useGame.subscribe(
             (state) => state.phase,
             (value) =>
@@ -75,18 +95,6 @@ export default function Player()
                 }
             }
         )
-        
-        /*
-       const unsubscribeJumpMobile = useGame.subscribe(
-            ((state) => state.toJump,
-            (value) =>
-            {
-                if(value == true)
-                {
-                    jump()
-                }
-            })
-       )*/
 
         const unsubscribeJump = subscribeKeys(
             (state) => state.jump,
@@ -110,7 +118,7 @@ export default function Player()
             unsubscribeAny()
             unsubscribeReset()
         }
-    },[])
+    }, [])
 
     useFrame((state, delta) =>
     {
@@ -174,11 +182,11 @@ export default function Player()
         /**
          * Phases
          */
-        if(bodyPosition.z < - (blocksCount * 4 + 2))
-            end()
+         if(bodyPosition.z < - (blocksCount * 4 + 2))
+         end()
 
-        if(bodyPosition.y < -4)
-            restart()
+         if(bodyPosition.y < -4)
+         restart()
     })
 
     return <RigidBody 

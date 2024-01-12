@@ -4,7 +4,7 @@ import { subscribeWithSelector } from  'zustand/middleware'
 export default create(subscribeWithSelector((set) =>
 {
     return {
-        blocksCount: 10,
+        blocksCount: 1,
         blocksSeed: 0,
         /**
          * Time
@@ -16,6 +16,8 @@ export default create(subscribeWithSelector((set) =>
          */
         phase: 'ready',
         jump: null,
+        move: null,
+        reset: null,
         start: () =>
         {
            set((state) => 
@@ -51,6 +53,20 @@ export default create(subscribeWithSelector((set) =>
             set((_) => 
             {
                return { jump: e }
+            })
+        },
+        setMove: (e) =>
+        {
+            set((_) =>
+            {
+               return { move: e }
+            })
+        },
+        setReset: (e) =>
+        {
+            set((_) =>
+            {
+               return { reset: e }
             })
         }
     }
