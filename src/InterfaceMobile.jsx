@@ -10,6 +10,8 @@ export default function InterfaceMobile()
 
     const object = useRef()
     const jump = useGame((state) => state.jump)
+    const restart = useGame((state) => state.restart)
+    const phase = useGame((state) => state.phase)
 
     const handleStop = () => {
         object.current.state.x = 0
@@ -48,26 +50,30 @@ export default function InterfaceMobile()
         }
     },[])
    
-    return <div className="mobile-controls">
-        {/* Movement */}
-        <div className="raw" >            
-            <Draggable
-                    ref={ object }
-                    axis="both"
-                    bounds={ { top:-25, left: -25, right: 25, bottom: 25} }
-                    onStop={ handleStop }
-                >
-                    <div className="key">   
-                        <div className="cursor">
-                        </div> 
-                    </div>
-            </Draggable>
-        </div>
-        {/* Jump */}
-        <div className="jump" onClick={ handleClick }>
-            <h1>
-                Jump
-            </h1>
+    return <div className="interface" >
+        {/* Restart */}
+        { phase === 'ended' && <div className="restart" onClick={ restart }>Restart</div>}
+        {/* Controls */}
+        <div className="mobile-controls">
+            {/* Movement */}
+            <div className="raw" >            
+                <Draggable
+                        ref={ object }
+                        axis="both"
+                        bounds={ { top:-25, left: -25, right: 25, bottom: 25} }
+                        onStop={ handleStop }
+                    >
+                        <div className="key">   
+                            <div className="cursor"/>
+                        </div>
+                </Draggable>
+            </div>
+            {/* Jump */}
+            <div className="jump" onClick={ handleClick }>
+                <h1>
+                    Jump
+                </h1>
+            </div>
         </div>
     </div>
 }
