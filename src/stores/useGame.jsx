@@ -15,6 +15,7 @@ export default create(subscribeWithSelector((set) =>
          * Phases
          */
         phase: 'ready',
+        jump: null,
         start: () =>
         {
            set((state) => 
@@ -44,6 +45,13 @@ export default create(subscribeWithSelector((set) =>
 
             return {}
            }) 
+        },
+        setJump: (e) => 
+        {
+            set((_) => 
+            {
+               return { jump: e }
+            })
         }
     }
 }))

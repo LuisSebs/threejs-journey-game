@@ -4,14 +4,14 @@ import { Bounds, useKeyboardControls } from '@react-three/drei'
 import { useState, useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import useGame from './stores/useGame'
+import { useMemo } from 'react'
 
 export default function Player()
 {
 
     const body = useRef()
     const [ subscribeKeys, getKeys ] = useKeyboardControls()
-    const { rapier, world } = useRapier() // RAPIER
-
+    const { rapier, world } = useRapier()
     const [ smoothedCameraPosition ] = useState(() => new THREE.Vector3(10, 10, 10))
     const [ smoothedCameraTarget ] = useState(() => new THREE.Vector3())
 
@@ -19,6 +19,7 @@ export default function Player()
     const end = useGame((state) => state.end)
     const restart = useGame((state) => state.restart)
     const blocksCount = useGame((state) => state.blocksCount)
+    const setJump = useGame((state) => state.setJump)
 
     const jump = () =>
     {
@@ -62,6 +63,7 @@ export default function Player()
 
     useEffect(() => 
     {
+        setJump( jump )
 
         const unsubscribeReset = useGame.subscribe(
             (state) => state.phase,
@@ -73,6 +75,18 @@ export default function Player()
                 }
             }
         )
+        
+        /*
+       const unsubscribeJumpMobile = useGame.subscribe(
+            ((state) => state.toJump,
+            (value) =>
+            {
+                if(value == true)
+                {
+                    jump()
+                }
+            })
+       )*/
 
         const unsubscribeJump = subscribeKeys(
             (state) => state.jump,

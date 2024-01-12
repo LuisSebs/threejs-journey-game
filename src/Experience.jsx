@@ -3,6 +3,7 @@ import { Level } from './Level.jsx'
 import { Physics } from '@react-three/rapier'
 import Player from './Player.jsx'
 import useGame from './stores/useGame.jsx'
+import InterfaceMobile from './InterfaceMobile.jsx'
 
 export default function Experience()
 {

@@ -94,3 +94,56 @@ body,
  {
      background: #ffffff99;
  }
+
+ .mobile-controls
+{
+  display: flex;
+  position: absolute;
+  bottom: 4%;
+  left: 4%;
+  width: 100%;
+}
+
+.mobile-controls .raw
+{
+    width: 100px;
+    height: 100px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    background: #ffffff20;
+}
+
+.mobile-controls .raw .key
+{
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mobile-controls .raw .key .cursor
+{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #ffffff44;
+    border: 2px solid #ffffff;
+}
+
+.mobile-controls .jump
+{
+    font-family: 'Bebas Neue';
+    color: #ffffff;
+    position: absolute;
+    right: 8%;
+    width: 100px;
+    height: 100px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    background: #ffffff20;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
