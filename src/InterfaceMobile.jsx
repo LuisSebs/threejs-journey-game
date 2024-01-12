@@ -9,6 +9,7 @@ export default function InterfaceMobile()
 {
 
     const object = useRef()
+    const time = useRef()
     const jump = useGame((state) => state.jump)
     const restart = useGame((state) => state.restart)
     const phase = useGame((state) => state.phase)
@@ -28,6 +29,8 @@ export default function InterfaceMobile()
     {
 
         const unsubscribeEffect = addEffect(() => {
+
+            // Move the ball
             const state = useGame.getState()
             const move = state.move
             const { x, y } = object.current.state
@@ -43,6 +46,20 @@ export default function InterfaceMobile()
                 if(bodyPosition.y < -4)
                     state.restart()
             }
+            
+            // Time
+            
+            let elapseTime = 0
+            if(state.phase === 'playing')
+                elapseTime = Date.now() - state.startTime
+            else if (state.phase === 'ended')
+                elapseTime = state.endTime - state.startTime
+
+            elapseTime /= 1000
+            elapseTime = elapseTime.toFixed(2)
+            
+            if(time.current)
+                time.current.textContent = elapseTime
         })
 
         return () => {
@@ -51,6 +68,8 @@ export default function InterfaceMobile()
     },[])
    
     return <div className="interface" >
+        {/* Time */}
+        <div ref={ time } className="time">0.00</div>
         {/* Restart */}
         { phase === 'ended' && <div className="restart" onClick={ restart }>Restart</div>}
         {/* Controls */}
