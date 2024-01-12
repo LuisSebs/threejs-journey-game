@@ -26,8 +26,8 @@ export default function Player()
     const move = (x,y) =>
     {
         const impulse = { x: 0, y: 0, z: 0 }
-        const impulseStrengthForwardBackward = 0.01 * (y/25)
-        const impulseStrengthLeftwardRightward = 0.01 * (x/25)
+        const impulseStrengthForwardBackward = 0.02 * (y/25)
+        const impulseStrengthLeftwardRightward = 0.02 * (x/25)
         impulse.z += impulseStrengthForwardBackward
         impulse.x += impulseStrengthLeftwardRightward
         body.current.applyImpulse(impulse)

@@ -48,7 +48,7 @@ export default function InterfaceMobile()
             }
             
             // Time
-            
+
             let elapseTime = 0
             if(state.phase === 'playing')
                 elapseTime = Date.now() - state.startTime
@@ -88,7 +88,7 @@ export default function InterfaceMobile()
                 </Draggable>
             </div>
             {/* Jump */}
-            <div className="jump" onClick={ handleClick }>
+            <div className="jump" onTouchStart={ handleClick } >
                 <h1>
                     Jump
                 </h1>
