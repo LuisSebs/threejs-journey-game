@@ -71,7 +71,7 @@ export default function InterfaceMobile()
         {/* Time */}
         <div ref={ time } className="time">0.00</div>
         {/* Restart */}
-        { phase === 'ended' && <div className="restart" onClick={ restart }>Restart</div>}
+        { phase === 'ended' && <div className="restart" onClick={ restart }>Click Here</div>}
         {/* Controls */}
         <div className="mobile-controls">
             {/* Movement */}

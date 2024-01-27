@@ -26,12 +26,17 @@ export default function Player()
     const move = (x,y) =>
     {
         const impulse = { x: 0, y: 0, z: 0 }
+        const torque = { x: 0, y: 0, z: 0 }
         const impulseStrengthForwardBackward = 0.02 * (y/25)
         const impulseStrengthLeftwardRightward = 0.02 * (x/25)
+        const torqueStrengthForwardBackward = 0.001 * (x/25)
+        const torqueStrengthLeftwardBackward = 0.001 * (y/25)
         impulse.z += impulseStrengthForwardBackward
         impulse.x += impulseStrengthLeftwardRightward
+        torque.z += torqueStrengthForwardBackward
+        torque.x += torqueStrengthLeftwardBackward
         body.current.applyImpulse(impulse)
-        
+        body.current.applyTorqueImpulse(torque)
         const bodyPosition = body.current.translation()
         
         return bodyPosition
@@ -166,7 +171,7 @@ export default function Player()
         const bodyPosition = body.current.translation()
         const cameraPosition = new THREE.Vector3()
         cameraPosition.copy(bodyPosition)
-        cameraPosition.z += 2.25
+        cameraPosition.z += 4
         cameraPosition.y += 0.65
 
         const cameraTarget = new THREE.Vector3()

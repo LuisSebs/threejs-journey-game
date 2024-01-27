@@ -99,7 +99,7 @@ body,
 {
   display: flex;
   position: absolute;
-  bottom: 4%;
+  bottom: 10%;
   left: 4%;
   width: 100%;
   pointer-events: auto;
@@ -147,5 +147,18 @@ body,
     justify-content: center;
     align-items: center;
     user-select: none;
+}
+
+.textito > div {
+    font-family: Arial, Helvetica;
+    position: absolute;
+    background: #00000088;
+    color: white;
+    padding: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    border-radius: 30px;
+    user-select: none;
+    pointer-events: none;
 }
 

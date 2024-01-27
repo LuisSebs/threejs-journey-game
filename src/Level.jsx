@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import { CuboidCollider, RigidBody } from '@react-three/rapier'
 import { useMemo, useState, useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
-import { Float, Text, useGLTF } from '@react-three/drei'
+import { Html, Clouds, Cloud, Float, Text, useGLTF } from '@react-three/drei'
 
 const boxGeometry = new THREE.BoxGeometry(1, 1, 1)
 
@@ -151,6 +151,12 @@ function BlockEnd({ position = [ 0, 0, 0 ] })
     })
 
     return <group position={ position }>  
+        <Float speed={4} >
+            <Clouds material={THREE.MeshBasicMaterial} position={ [ 1.0, - 0.25, 0 ] }>
+                    <Cloud seed={1} segments={ 40 } scale={0.1} volume={10} color="mediumpurple" position={ [ 0, 1.5, 0] }/>
+                    <Cloud seed={2} segments={ 40 } scale={0.1} volume={10} color="hotpink" fade={ 15 } position={ [ 0, 1.5, 0.05] }/>
+            </Clouds>
+        </Float>
         <Text
             font='./bebas-neue-v9-latin-regular.woff'
             scale={ 1 }
@@ -166,8 +172,16 @@ function BlockEnd({ position = [ 0, 0, 0 ] })
             scale={ [ 4, 0.2, 4 ] } 
             receiveShadow 
         />
+        <Html
+            position={ [ - 1.25, 0.5, - 1] }
+            wrapperClass={"textito"}
+            center
+            distanceFactor={ 6 }
+        >
+            @luis_sebastian123 🍔
+        </Html>
         <RigidBody type="fixed" colliders="hull" position={ [ 0, 0.25, 0 ] } restitution={ 0.2 } friction={ 0 } >
-            <primitive object={ hamburger.scene } scale={ 0.2 }/>
+            <primitive object={ hamburger.scene } scale={ 0.1 }/>
         </RigidBody>
     </group>
 }
