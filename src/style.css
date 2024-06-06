@@ -83,6 +83,9 @@ body,
      margin: 4px;
      border: 2px solid #ffffff;
      background: #ffffff44;
+     display: flex;
+     justify-content: center;
+     align-items: center;
  }
  
  .controls .key.large
@@ -93,6 +96,10 @@ body,
  .controls .key.active
  {
      background: #ffffff99;
+ }
+
+ .controls .key {
+    color: #fff;
  }
 
  .mobile-controls
@@ -160,5 +167,17 @@ body,
     border-radius: 30px;
     user-select: none;
     pointer-events: none;
+}
+
+@media (min-width: 768px){
+    .interface-mobile {
+        display: none;
+    }
+}
+
+@media (max-width: 768px){
+    .interface-desktop{
+        display: none;
+    }
 }
 

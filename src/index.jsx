@@ -30,6 +30,6 @@ root.render(
             <Experience />
         </Canvas>
         <InterfaceMobile />
-        {/*<Interface />*/}
+        <Interface />
     </KeyboardControls>
 )

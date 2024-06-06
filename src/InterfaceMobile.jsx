@@ -67,7 +67,7 @@ export default function InterfaceMobile()
         }
     },[])
    
-    return <div className="interface" >
+    return <div className="interface interface-mobile" >
         {/* Time */}
         <div ref={ time } className="time">0.00</div>
         {/* Restart */}

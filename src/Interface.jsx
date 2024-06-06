@@ -38,7 +38,7 @@ export default function Interface()
         }
     }, [])
 
-    return <div className="interface">
+    return <div className="interface interface-desktop">
         {/* Time */}
         <div ref={ time } className="time">0.00</div>
         {/* Restart */}
@@ -46,15 +46,15 @@ export default function Interface()
         {/* Controls */}
         <div className="controls">
             <div className="raw">
-                <div className={` key ${forward ? 'active' : '' } `}></div>
+                <div className={` key ${forward ? 'active' : '' } `}><p>W</p></div>
             </div>
             <div className="raw">
-                <div className={` key ${leftward ? 'active' : '' } `}></div>
-                <div className={` key ${backward ? 'active' : '' } `}></div>
-                <div className={` key ${rightward ? 'active' : '' } `}></div>
+                <div className={` key ${leftward ? 'active' : '' } `}><p>A</p></div>
+                <div className={` key ${backward ? 'active' : '' } `}><p>S</p></div>
+                <div className={` key ${rightward ? 'active' : '' } `}><p>D</p></div>
             </div>
             <div className="raw">
-                <div className={` key large ${jump ? 'active' : '' } `}></div>
+                <div className={` key large ${jump ? 'active' : '' } `}><p>SPACE</p></div>
             </div>
         </div>
     </div>
